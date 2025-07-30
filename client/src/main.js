@@ -5,7 +5,7 @@ const hideCameras = document.getElementById("hide-cameras")
 
 async function getCameras(){
 
-  const response = await fetch ("http://localhost:2222/digitalcameras");
+  const response = await fetch ("https://week-8-assignment.onrender.com/digitalcameras");
  const cameraInfo = await response.json();
 
  console.log (cameraInfo);
