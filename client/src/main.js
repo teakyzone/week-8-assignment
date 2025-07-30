@@ -1,24 +1,34 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const showCameras = document.getElementById("show-cameras");
+const cameraInventory = document.getElementById("cameraList")
+const hideCameras = document.getElementById("hide-cameras")
 
-setupCounter(document.querySelector('#counter'))
+async function getCameras(){
+
+  const response = await fetch ("http://localhost:2222/digitalcameras");
+ const cameraInfo = await response.json();
+
+ console.log (cameraInfo);
+
+document.getElementById("cameraList").innerHTML = "";
+
+ cameraInfo.forEach((camera) => {
+
+console.log(camera);
+const newCameraList = document.createElement("section")
+newCameraList.textContent = camera.title,camera.subHeading
+
+
+document.getElementById("cameraList").appendChild(newCameraList)
+
+ }
+
+)}
+
+showCameras.addEventListener ("click", getCameras);
+hideCameras.addEventListener ("click", () => {
+  cameraInventory.innerHTML = "";
+});
+
+ // document.getElementById("cameraList").innerHTML = "";
+
